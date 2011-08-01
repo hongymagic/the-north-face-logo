@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>The North Face logo</title>
+  </head>
+  <body>
+    <canvas width="310" height="146" alt="THE NORTH FACE logo"></canvas>
+  </body>
+</html>
+
+<script src="js/CanvasRenderingContext2D.renderText.js"></script>
+<script src="js/THE_NORTH_FACE_LOGO.js"></script>
+<script>
+  // require('THE_NORTH_FACE');
+
+  //
+  // Let's draw the thirce half-domes using THE_NORTH_FACE api
+  Array.prototype.slice.call(document.querySelectorAll('canvas')).forEach(function (c) {
+      var ctx = c.getContext('2d'),
+          w = 109,
+          h = c.height,
+          x = c.width - (w + 3),
+          y = h;
+    
+      // Draw the font with 'letter-spacing' enabled
+      // See Managed Resources
+      ctx.font = '400 64px Helvetica';
+      ctx.textAlign = 'right';
+      ctx.renderText('THE', x, h / 3 - 1, -5);
+      ctx.renderText('NORTH', x, 2 * h / 3 - 1, -6);
+      ctx.renderText('FACE', x, h - 1, -6);
+    
+      // Draw the logo
+      x = c.width - w;
+      THE_NORTH_FACE.draw(ctx, x, y, w, h, 'white', 'black');
+  });
+</script>
