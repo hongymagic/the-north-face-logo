@@ -25,10 +25,10 @@ var THE_NORTH_FACE = (function (document) {
       drawHalfDome;     // required for drawing 1⁄2 domes
   
   // If HTML5 Canvas is not supported, let's not even bother
-  supportsCanvas = function (document) {
+  supportsCanvas = (function (document) {
     var canvas = document.createElement('canvas');
     return !!(canvas.getContext && canvas.getContext('2d'));
-  }(document);
+  }(document));
   
   // Responsible for drawing a Half Dome
   drawHalfDome = function (context, x, y, width, height) {
@@ -53,7 +53,7 @@ var THE_NORTH_FACE = (function (document) {
       // Start outside (outer-dome)
       var rings = 5,
           ring = rings;
-      while (ring--) {
+      while (ring >= 0) {
         var index   = rings - ring,
             swidth  = index === 1 ? width :
                       index === 2 ? 0.598 * width :
@@ -68,12 +68,10 @@ var THE_NORTH_FACE = (function (document) {
                       index === 5 ? 0.323 * height :
                       0;
           
-         // ewww.
-                      
-            
         context.fillStyle = ring % 2 === 0 ? color : bgColor;
-        
         drawHalfDome(context, x, y, swidth, sheight);
+
+        ring -= 1;
       }
     }
   };
